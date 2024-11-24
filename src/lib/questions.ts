@@ -23,7 +23,7 @@ export const questions: Question[] = [
   { id: 'r3', text: "Long-distance relationships can work", category: "romantic" },
   { id: 'r4', text: "Public displays of affection are sweet", category: "romantic" },
   { id: 'r5', text: "Romantic movies reflect real relationships", category: "romantic" },
-  { id: 'r6', text: "Valentine's Day is important", category: "romantic" },
+  { id: 'r6', text: 'Valentine\'s Day is important', category: "romantic" },
   { id: 'r7', text: "Date nights should be weekly", category: "romantic" },
   { id: 'r8', text: "Love letters are better than text messages", category: "romantic" },
   { id: 'r9', text: "Small gestures matter more than grand ones", category: "romantic" },
@@ -51,5 +51,5 @@ export const questions: Question[] = [
   { id: 'p7', text: "Career should come before relationship", category: "practical" },
   { id: 'p8', text: "Saving for the future is essential", category: "practical" },
   { id: 'p9', text: "Prenuptial agreements are important", category: "practical" },
-  { id: 'p10', text: "Both partners should work", category: "practical" },
+  { id: 'p10', text: "Both partners should work", category: "practical" }
 ];
