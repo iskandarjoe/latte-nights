@@ -10,136 +10,101 @@ const TOTAL_QUESTIONS = 25;
 const SWIPE_THRESHOLD = 100;
 
 const categoryColors: Record<Question['category'], string> = {
-    fun: 'bg-yellow-50',
-    romantic: 'bg-pink-50',
-    deep: 'bg-blue-50',
-    practical: 'bg-purple-50'
-  };
+  fun: 'bg-yellow-50',
+  romantic: 'bg-pink-50',
+  deep: 'bg-blue-50',
+  practical: 'bg-purple-50'
+};
 
-/* const Tutorial = ({ onStart }: { onStart: () => void }) => {
+const Tutorial = ({ onStart }: { onStart: () => void }) => {
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center justify-center min-h-screen p-6 text-center bg-white"
+      className="flex flex-col items-center justify-center min-h-screen p-6 bg-white"
     >
-      <div className="space-y-6 max-w-md">
-        <h1 className="text-4xl font-light mb-8 flex items-center justify-center gap-2">
+      <div className="space-y-8 max-w-md w-full">
+        <h1 className="text-4xl font-light text-center flex items-center justify-center gap-2">
           <Coffee className="w-8 h-8" />
           Latte Nights
           <Heart className="w-8 h-8 text-pink-500" />
         </h1>
         
-        <div className="space-y-4 text-lg font-light">
-          <p>Swipe:</p>
-          <p>⬆️ Agree</p>
-          <p>⬇️ Disagree</p>
-          <p>⬅️ Skip</p>
-          <p>➡️ Previous</p>
+        <div className="w-48 mx-auto space-y-4 text-lg font-light">
+          <p className="flex items-center gap-3">
+            <span className="text-xl">⬆️</span>
+            <span>Agree</span>
+          </p>
+          <p className="flex items-center gap-3">
+            <span className="text-xl">⬇️</span>
+            <span>Disagree</span>
+          </p>
+          <p className="flex items-center gap-3">
+            <span className="text-xl">⬅️</span>
+            <span>Skip</span>
+          </p>
+          <p className="flex items-center gap-3">
+            <span className="text-xl">➡️</span>
+            <span>Previous</span>
+          </p>
         </div>
 
-        <button
-          onClick={onStart}
-          className="mt-8 px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full font-light hover:opacity-90 transition-opacity"
-        >
-          Let's Play
-        </button>
+        <div className="text-center">
+          <button
+            onClick={onStart}
+            className="w-0.75 px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full font-light hover:opacity-90 transition-opacity"
+          >
+            Let&apos;s Play
+          </button>
+        </div>
       </div>
     </motion.div>
   );
-}; */
-
-const Tutorial = ({ onStart }: { onStart: () => void }) => {
-    return (
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="flex flex-col items-center justify-center min-h-screen p-6 bg-white"
-      >
-        <div className="space-y-8 max-w-md w-full">  {/* Increased space-y to 8 */}
-          <h1 className="text-4xl font-light text-center flex items-center justify-center gap-2">
-            <Coffee className="w-8 h-8" />
-            Latte Nights
-            <Heart className="w-8 h-8 text-pink-500" />
-          </h1>
-          
-          {/* Instructions container with specific width and auto margins */}
-          <div className="w-48 mx-auto space-y-4 text-lg font-light">  {/* w-48 sets fixed width, mx-auto centers it */}
-            <p className="flex items-center gap-3">
-              <span className="text-xl">⬆️</span>
-              <span>Agree</span>
-            </p>
-            <p className="flex items-center gap-3">
-              <span className="text-xl">⬇️</span>
-              <span>Disagree</span>
-            </p>
-            <p className="flex items-center gap-3">
-              <span className="text-xl">⬅️</span>
-              <span>Skip</span>
-            </p>
-            <p className="flex items-center gap-3">
-              <span className="text-xl">➡️</span>
-              <span>Previous</span>
-            </p>
-          </div>
-  
-          <div className="text-center">
-            <button
-              onClick={onStart}
-              className="w-0.75 px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full font-light hover:opacity-90 transition-opacity"
-            >
-              Let's Play
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    );
-  };
+};
 
 const GameCard = ({ question, onSwipe }: { 
-    question: Question, 
-    onSwipe: (direction: string) => void 
-  }) => {
-    return (
-      <motion.div
-        drag
-        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-        dragElastic={0.9}
-        onDragEnd={(event, { offset }) => {
-          const swipe = Math.abs(offset.x) > SWIPE_THRESHOLD ? (offset.x > 0 ? 'right' : 'left') :
-                       Math.abs(offset.y) > SWIPE_THRESHOLD ? (offset.y > 0 ? 'down' : 'up') : null;
-          if (swipe) onSwipe(swipe);
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.3 }}
-        className={`${categoryColors[question.category]} min-h-screen w-full fixed inset-0 flex items-center justify-center p-6`}
-      >
-        <p className="text-2xl font-light text-center max-w-md">{question.text}</p>
-      </motion.div>
-    );
-  };
-
-// I'll continue with the rest of the component in the next message to keep this organized
-
-// ... Previous code remains the same ...
+  question: Question, 
+  onSwipe: (direction: string) => void 
+}) => {
+  return (
+    <motion.div
+      drag
+      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      dragElastic={0.9}
+      onDragEnd={(event, { offset }) => {
+        const swipe = Math.abs(offset.x) > SWIPE_THRESHOLD ? (offset.x > 0 ? 'right' : 'left') :
+                     Math.abs(offset.y) > SWIPE_THRESHOLD ? (offset.y > 0 ? 'down' : 'up') : null;
+        if (swipe) onSwipe(swipe);
+      }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.3 }}
+      className={`${categoryColors[question.category]} min-h-screen w-full fixed inset-0 flex items-center justify-center p-6`}
+    >
+      <p className="text-2xl font-light text-center max-w-md">{question.text}</p>
+    </motion.div>
+  );
+};
 
 interface Scores {
-    agree: number;
-    disagree: number;
-    skip: number;
-    categories: Record<Question['category'], number>;
-  }
+  agree: number;
+  disagree: number;
+  skip: number;
+  categories: Record<Question['category'], number>;
+}
+
+
   
-  const ScoreCard = ({ scores, onPlayAgain }: { 
+const ScoreCard = ({ scores, onPlayAgain }: { 
     scores: Scores, 
     onPlayAgain: () => void 
   }) => {
     const totalResponses = scores.agree + scores.disagree + scores.skip;
     
     const handleShare = useCallback(async () => {
-      const shareText = `Just played Latte Nights!\n
+      const shareText = `Just played Latte Nights!
+  
   Agreements: ${((scores.agree / totalResponses) * 100).toFixed(1)}%
   Disagreements: ${((scores.disagree / totalResponses) * 100).toFixed(1)}%
   Skipped: ${((scores.skip / totalResponses) * 100).toFixed(1)}%`;
@@ -167,8 +132,7 @@ interface Scores {
       >
         <div className="max-w-md mx-auto space-y-6">
           <div className="text-center">
-            {/* <h2 className="text-3xl font-light mb-2">Results</h2> */}
-            <p className="text-gray-500 font-light">Here's how you both matched up!</p>
+            <p className="text-gray-500 font-light">Here&apos;s how you both matched up!</p>
           </div>
   
           <div className="grid grid-cols-3 gap-4">
@@ -245,16 +209,16 @@ interface Scores {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answeredQuestions, setAnsweredQuestions] = useState<string[]>([]);
     const [scores, setScores] = useState<Scores>({
-        agree: 0,
-        disagree: 0,
-        skip: 0,
-        categories: {
-          fun: 0,
-          romantic: 0,
-          deep: 0,
-          practical: 0
-        }
-      });
+      agree: 0,
+      disagree: 0,
+      skip: 0,
+      categories: {
+        fun: 0,
+        romantic: 0,
+        deep: 0,
+        practical: 0
+      }
+    });
   
     const [shuffledQuestions] = useState(() => 
       [...questions].sort(() => Math.random() - 0.5)
@@ -268,32 +232,32 @@ interface Scores {
     const isGameOver = answeredQuestions.length >= TOTAL_QUESTIONS;
   
     const handleSwipe = useCallback((direction: string) => {
-        if (!currentQuestion) return;
-    
-        setScores(prevScores => {
-          const scoreUpdate = { ...prevScores };
-          
-          if (direction === 'up') scoreUpdate.agree++;
-          else if (direction === 'down') scoreUpdate.disagree++;
-          else if (direction === 'left') scoreUpdate.skip++;
-          
-          if (direction !== 'right') {
-            const category = currentQuestion.category;
-            scoreUpdate.categories[category]++;
-          }
-          
-          return scoreUpdate;
-        });
-    
+      if (!currentQuestion) return;
+  
+      setScores(prevScores => {
+        const scoreUpdate = { ...prevScores };
+        
+        if (direction === 'up') scoreUpdate.agree++;
+        else if (direction === 'down') scoreUpdate.disagree++;
+        else if (direction === 'left') scoreUpdate.skip++;
+        
         if (direction !== 'right') {
-          setAnsweredQuestions(prev => [...prev, currentQuestion.id]);
+          const category = currentQuestion.category;
+          scoreUpdate.categories[category]++;
         }
         
-        setCurrentQuestionIndex(prev => 
-          direction === 'right' && prev > 0 ? prev - 1 : 
-          direction !== 'right' ? prev + 1 : prev
-        );
-      }, [currentQuestion]);
+        return scoreUpdate;
+      });
+  
+      if (direction !== 'right') {
+        setAnsweredQuestions(prev => [...prev, currentQuestion.id]);
+      }
+      
+      setCurrentQuestionIndex(prev => 
+        direction === 'right' && prev > 0 ? prev - 1 : 
+        direction !== 'right' ? prev + 1 : prev
+      );
+    }, [currentQuestion]);
   
     const handlePlayAgain = useCallback(() => {
       setGameStarted(true);
